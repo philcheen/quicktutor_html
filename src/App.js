@@ -1,20 +1,24 @@
 import React, {Component, Fragment} from 'react';
-import {useState} from 'react';
+import {useState, createContext} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Counter from './Counter';
+
+const totalContext = createContext();
 
 function App() {
     const [total, setTotal] = useState(0);
     return (
         <>
-            <Counter focus setTotal={setTotal}/>
-            <hr/>
-            <Counter setTotal={setTotal}/>
-            <hr/>
-            <Counter setTotal={setTotal}/>
-            <hr/>
-            <b>Total:{total}</b>
+            <totalContext.Provider value={[total, setTotal]}>
+                <Counter/>
+                <hr/>
+                <Counter />
+                <hr/>
+                <Counter/>
+                <hr/>
+                <b>Total:{total}</b>
+            </totalContext.Provider>
         </>
     );
 }
@@ -43,4 +47,5 @@ function App() {
 //   }
 // }
 
-export default App;
+// export default App;
+export {App, totalContext};

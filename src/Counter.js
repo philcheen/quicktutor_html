@@ -1,55 +1,29 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
-function Counter({init, end, autostart}) {
-    init = parseInt(init || 0);
-    end = parseInt(end || 0);
-    autostart = parseInt(autostart || 0);
-
-    const [count, setCount] = useState(init);
-    const [start, setStart] = useState(true);
-
-    function increase() {
-        setCount((count) => count + 1);
-    };
-    useEffect(function () {
-        if (autostart) restart();
-    },autostart);
-    useEffect(function () {
-        if (!start) {
-            let timer = setInterval(function () {
-                setCount((count) => {
-                    let newCount = count + 1;
-                    if (newCount >= end) setStart(true);
-                    return newCount;
-                });
-            }, 1000);
-            return function () {
-                clearInterval(timer);
-            }
+function Counter() {
+    const [value, setValue] = useState("");
+    const refCounter = useRef();
+    useEffect(
+        function () {
+            refCounter.current.focus();
         }
-    });
-
-
-    function restart() {
-        setStart(false);
-        setCount(init);
+    )
+    function change(event) {
+        setValue(event.target.value);
     }
+
+    function keydown(event) {
+        console.log(event.key);
+        if (["Backspace", "Delete", "ArrowLeft", "ArrowRight",
+            "Tab"].includes(event.key)) return;
+        if (event.key < "0" || event.key > "9") event.preventDefault();
+    }
+
     return (
         <>
-            Initial value of the counter is: {init}
+            Counter : <input type="text" onChange={change} onKeyDown={keydown} ref={refCounter}/> <br/>
             <br/>
-            End of the counter at: {end}
-            <br/>
-            The counter is: {count}
-            <br/>
-            {
-                (start) ?
-                    <>
-                        <b>Counter stopped</b>&nbsp;
-                        <button onClick={restart}>Start</button>
-                    </> :
-                    <i>Counter in progress</i>
-            }
+            Input Value : {value}
         </>
     );
 }

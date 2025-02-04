@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
 
-function Counter(props) {
-    const init = props.init;
+function Counter({init, end}) {
+    init = parseInt(init || 0);
+    end = parseInt(end || 0);
     const [count, setCount] = useState(init);
     useEffect(function () {
+        if (end && count >= end) return;
         let timer = setInterval(function () {
-            setCount((count)=>count + 1);
+            setCount((count) => count + 1);
             console.log("count=", count);
         }, 1000);
         return function () {
@@ -15,8 +17,11 @@ function Counter(props) {
     return (
         <>
             Initial value of the counter is: {init}
-            <br />
+            <br/>
             The counter is: {count}
+            {
+                (end && count >= end) ? <b>Counter stopped</b> : <i>Counter in progress</i>
+            }
         </>
     );
 }

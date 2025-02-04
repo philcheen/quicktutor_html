@@ -1,15 +1,18 @@
 import React, {useState, useEffect, useRef} from 'react';
 
-function Counter() {
+function Counter({setTotal, focus}) {
     const [value, setValue] = useState("");
     const refCounter = useRef();
     useEffect(
         function () {
-            refCounter.current.focus();
+            if (focus) refCounter.current.focus();
         }
-    )
+    ,[]);
     function change(event) {
-        setValue(event.target.value);
+        const newValue = parseInt(event.target.value||0);
+        setValue(newValue);
+        setTotal((total)=>(total-value));
+        setTotal((total)=>(total+newValue));
     }
 
     function keydown(event) {

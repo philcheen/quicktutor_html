@@ -1,51 +1,20 @@
-import React, {Component, Fragment} from 'react';
-import {useState, createContext} from 'react';
 import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import Counter from './Counter';
-
-const totalContext = createContext();
-
+import { useState } from "react";
+import Items from "./Items";
 function App() {
-    const [total, setTotal] = useState(0);
+    const [items, setItems] = useState([]);
+    function add() {
+        let item = "Item " + (items.length + 1);
+        items.push(item);
+        setItems([...items]);
+    }
     return (
         <>
-            <totalContext.Provider value={[total, setTotal]}>
-                <Counter/>
-                <hr/>
-                <Counter />
-                <hr/>
-                <Counter/>
-                <hr/>
-                <b>Total:{total}</b>
-            </totalContext.Provider>
+            <button onClick={add}>Add Item</button>
+            <Items items={items} setItems={setItems}/>
         </>
     );
 }
-
-// class App extends Component {
-//
-//   render() {
-//     return (
-//       <div className="App">
-//         <header className="App-header">
-//           <img src={logo} className="App-logo" alt="logo" />
-//           <p>
-//             Edit <code>src/App.js</code> and save to reload.
-//           </p>
-//           <a
-//             className="App-link"
-//             href="https://reactjs.org"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             Learn React
-//           </a>
-//         </header>
-//       </div>
-//     );
-//   }
-// }
-
-// export default App;
-export {App, totalContext};
+export default App;

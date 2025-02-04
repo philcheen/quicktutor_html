@@ -1,26 +1,21 @@
 import React, {useState, useEffect, useRef, useContext, useReducer} from 'react';
 import {totalContext} from "./App";
+import usePreviousState from "./usePreviousState";
 
 function Counter() {
-    const [state, dispatch] = useReducer(function(state, action) {
-        if (action.type === "INCR") state.value += action.step;
-        if (action.type === "DECR") state.value -= action.step;
-        return {...state};
-    }, {value:0});
-    function incrValue() {
-        dispatch({type:"INCR", step:2});
+    const [value, setValue] = useState("");
+    const prevValue = usePreviousState(value);
+
+    function change(event) {
+        let value = event.target.value;
+        setValue(value);
     }
-    function decrValue() {
-        dispatch({type:"DECR", step:2});
-    }
+
     return (
         <>
-            <button onClick={incrValue}>value + 1</button>
-            &nbsp;&nbsp;
-            <button onClick={decrValue}>value - 1</button>
-            &nbsp;
-            =>
-            value = {state.value};
+            Current Value : <input type="text" onChange={change}/>
+            <br/>
+            Previous value : {prevValue}
         </>
     )
 }

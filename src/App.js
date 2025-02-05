@@ -1,10 +1,12 @@
 import logo from './logo.svg';
 import React from 'react';
 import './App.css';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import Items from "./Items";
 
 function App() {
+
+
 
     function loadImage(url) {
         return new Promise(function (resolve, reject) {

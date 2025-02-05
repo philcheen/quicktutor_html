@@ -13,7 +13,7 @@ function Item({name, index, setItems}) {
         console.log(a); // 1
         console.log(b); // 2
         console.log(aaa); // [3, 4, 5]
-    });
+    },[]);
 
     function remove() {
         setItems(function (items) {

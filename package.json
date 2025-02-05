@@ -14,7 +14,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "react-scripts start",
+    "debug": "react-scripts start --inspect"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -28,6 +30,7 @@
   "devDependencies": {
     "@neutrinojs/react": "^8.3.0",
     "@neutrinojs/react-components": "^8.3.0",
-    "neutrino": "^8.3.0"
+    "neutrino": "^8.3.0",
+    "nodemon": "^3.1.9"
   }
 }

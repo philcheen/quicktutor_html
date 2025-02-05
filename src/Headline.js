@@ -1,0 +1,23 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+class Headline extends React.Component {
+    static defaultProps = {
+        title: 'Default heading',
+    };
+    state = {
+        title: '',
+    };
+    constructor(props) {
+        super(props);
+        this.state.title = props.title;
+    }
+    render() {
+        return <h1>{this.state.title}</h1>;
+    }
+}
+Headline.propTypes = {
+    title: PropTypes.string,
+};
+
+export default Headline;

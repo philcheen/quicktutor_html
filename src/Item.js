@@ -7,6 +7,12 @@ function Item({name, index, setItems}) {
 
     useEffect(function () {
         if (refInput.current) refInput.current.focus();
+
+        let array = [1, 2, 3, 4, 5];
+        let [a, b, ...aaa] = array;
+        console.log(a); // 1
+        console.log(b); // 2
+        console.log(aaa); // [3, 4, 5]
     });
 
     function remove() {

@@ -1,8 +1,9 @@
 import React from 'react';
+import {BooksContext} from "./BooksContext";
 
 export default class Timer extends React.Component {
+    static contextType = BooksContext;
     interval = null;
-
     constructor(props) {
         console.log('Constructor');
         super(props);
@@ -25,12 +26,16 @@ export default class Timer extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         console.log('shouldComponentUpdate');
-        return nextProps.time % 2 === 0;
+        return nextState.time % 2 === 0;
     }
 
     render() {
         console.log('render');
-        return <div>{this.state.time}</div>;
+        console.log(this.context);
+        return <div>
+            time:{this.context.time}
+            show:{this.context.show.toString()}
+        </div>;
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
